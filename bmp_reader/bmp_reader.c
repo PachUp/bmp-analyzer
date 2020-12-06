@@ -19,6 +19,7 @@
 #define BASE_16 16
 #define ONE 1
 #define TWO 2
+#define THREE 3
 
 int main(void)
 {
@@ -90,8 +91,8 @@ int main(void)
   printf("The width of the picture: %d\nThe height of the picture: %d", bmp_info.width, bmp_info.height);
 
 
-  padding = bmp_info.width * 3; // padding for 24-bit bmp file
-  int color_pos = 0; // max numbers are 1-3
+  padding = bmp_info.width * THREE; // padding for 24-bit bmp file
+  int color_pos = ZERO; // max numbers are 1-3
   for (byte = ZERO; byte < file_len - TWO; byte++)
   {
     if (byte >= COLOR_BYTES_START)
@@ -100,14 +101,14 @@ int main(void)
         char hex[MAX_HEX_2_SIZE + ONE]; // + 1 for null insert.
         sprintf(hex, "%02x", file_data[byte]); // deciaml to hex
         color_pos++;
-        if (color_pos == 3) {
+        if (color_pos == THREE) {
           strcpy(bmp_info.color[color_count].b, hex);
           int color_exist = check_if_color_exists(bmp_info.color[color_count], bmp_info, color_count);
           if (!color_exist)
           {
             color_count++;
           }
-          color_pos = 0;
+          color_pos = ZERO;
         }
         /*Because we modulo by 6 we need to check if the current number modulo 4 is actually 4*/
         else if (color_pos == TWO) {
@@ -124,7 +125,7 @@ int main(void)
 
   }
   int i;
-  for(i = 0; i < color_count; i++)
+  for(i = ZERO; i < color_count; i++)
   {
     printf("\nfound color(s) in the image: #%.2s%.2s%.2s", bmp_info.color[i].b, bmp_info.color[i].g, bmp_info.color[i].r);
   }
@@ -176,5 +177,5 @@ int check_if_color_exists(rgb color, bmp bmp_info, int bmp_color_counter) {
         return ONE;
      }
   }
-  return 0;
+  return ZERO;
 }

@@ -4,6 +4,7 @@
 
 #define MAX_24_BIT_COLORS 50
 #define MAX_HEX_2_SIZE 2
+
 struct rgb {
   char r[MAX_HEX_2_SIZE];
   char g[MAX_HEX_2_SIZE];
@@ -18,7 +19,7 @@ struct bmp_data {
 };
 
 enum bmp_dimensions_length {MAX_HEIGHT_HEX_LENGTH = 8, MAX_WIDTH_HEX_LENGTH = 8};
-enum status{SUCCESS = 1, FAILURE = 0};
+enum status {SUCCESS = 1, FAILURE = 0};
 
 typedef struct bmp_data bmp;
 typedef enum status status;
